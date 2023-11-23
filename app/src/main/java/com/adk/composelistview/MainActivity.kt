@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -25,16 +27,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val scrollState = rememberScrollState()
             ComposeListViewTheme {
-
-                Column(
-                    modifier = Modifier
-                        .verticalScroll(scrollState)
-                ) {
-                    for (i in 1..50){
+                LazyColumn() {
+                    itemsIndexed(
+                        listOf("Car", "Bus", "Van", "Train")
+                    ) {
+                        index, item ->
                         Text(
-                            text = "Item $i",
+                            text = "Item $item",
                             fontSize = 24.sp,
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.Bold,
